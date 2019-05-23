@@ -1,20 +1,20 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<head>
+<!-- Required meta tags -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<!-- Bootstrap CSS -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
-    <link rel="stylesheet" href="assets/css/app.css">
+<link rel="stylesheet" href="assets/css/app.css">
 
-    <title>Интернет-магазин на Vue.js</title>
-  </head>
-  <body>
-  	<div id="app">
-  		<nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm">
+<title>Интернет-магазин на Vue.js</title>
+</head>
+<body>
+	<div id="app">
+		<nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm">
 		  <a class="navbar-brand" href="#" v-text="sitename"></a>
 		  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 		    <span class="navbar-toggler-icon"></span>
@@ -49,22 +49,105 @@
 		    </form>
 		  </div>
 		</nav>
-  	</div>
+		<main>
+			<!-- Основной контент здесь -->
+			<div class="card col-sm-4">
+				<div class="card-header">
+			    	<h5 class="card-title">{{ product.title }}<span v-if="product.new" class="badge badge-success">New</span></h5>
+			  	</div>
+				<div class="card-body">
+					<img :src="product.image" class="card-img-top" :alt="product.title">
+					<hr>
+					<p class="card-text" v-text="product.description"></p>
+				</div>
+			    <div class="card-footer row">
+			    	<div class="col-sm-6">
+			    		<strong>{{ product.price }} руб.</strong>
+			    	</div>
+			    	<div class="col-sm-6">
+				  		<button type="button" class="btn btn-info">Подробности</button>
+				  	</div>
+			    </div>
+			</div>
+		</main>
+	</div>
 
-  	<!-- development version, includes helpful console warnings -->
-	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<!-- development version, includes helpful console warnings -->
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 
-    <script>
-    	let webapp = new Vue({
-    		el: '#app',
-    		data: {
-    			sitename: 'Интернет-магазин на Vue.js'
-    		}
-    	});
-    </script>
+<script>
+	// Включить/отключить логгирование
+	const APP_LOG_LIFECYCLE_EVENTS = true;
 
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-  </body>
+	let webapp = new Vue({
+		el: '#app',
+		data: {
+			sitename: 'Интернет-магазин на Vue.js',
+			product: {
+				// http://www.holodilnik.ru/digital_tech/notebook/asus/90nr00i3_m1074/sankt-peterburg/
+				id: 1001,
+				new: true,
+				title: 'Ноутбук ASUS FX 504 GE-E 4633 T i7-8750 H (90 NR 00 I3-M 10740) Gunmetal, Metal',
+				description: 'Отличная модель, которая подойдет все любителям гейминга.',
+				characteristics: {
+					processor: {
+						title: 'Процессор',
+						text: 'Intel Core i7 2,2 ГГц'
+					},
+					RAM: {
+						title: 'Оперативная память',
+						text: '8 ГБ DDR4-2666 МГц'
+					},
+					OS: {
+						title: 'Операционная система',
+						text: 'Windows 10'
+					},
+					HDD: {
+						title: 'Встроенная память',
+						text: '1000 Гб (HDD) + 256 Гб (SSD)'
+					},
+					display: {
+						title: 'Дисплей',
+						text: '15,6", 1920x1080, широкоформатный'
+					},
+					video: {
+						title: 'Видео',
+						text: '4 Гб GDDR5'
+					}
+				},
+				price: 77989,
+				image: 'http://holod.ru/pics/clean/medium/50/581250_0.jpg'
+			}
+		},
+		beforeCreate() {
+			if(APP_LOG_LIFECYCLE_EVENTS) { console.info('beforeCreate') }
+		},
+		created() {
+			if(APP_LOG_LIFECYCLE_EVENTS) { console.info('created') }
+		},
+		beforeMount() {
+			if(APP_LOG_LIFECYCLE_EVENTS) { console.info('beforeMount') }
+		},
+		mounted() {
+			if(APP_LOG_LIFECYCLE_EVENTS) { console.info('mounted') }
+		},
+		beforeUpdate() {
+			if(APP_LOG_LIFECYCLE_EVENTS) { console.info('beforeUpdate') }
+		},
+		updated() {
+			if(APP_LOG_LIFECYCLE_EVENTS) { console.info('updated') }
+		},
+		beforeDestroy() {
+			if(APP_LOG_LIFECYCLE_EVENTS) { console.info('beforeDestroy') }
+		},
+		destroyed() {
+			if(APP_LOG_LIFECYCLE_EVENTS) { console.info('destroyed') }
+		},
+	});
+</script>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+</body>
 </html>
