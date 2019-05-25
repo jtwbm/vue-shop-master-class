@@ -15,40 +15,42 @@
 <body>
 	<div id="app">
 		<nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm">
-		  <a class="navbar-brand" href="#" v-text="sitename"></a>
-		  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-		    <span class="navbar-toggler-icon"></span>
-		  </button>
+			<div class="container">
+			  <a class="navbar-brand" href="#" v-text="sitename"></a>
+			  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+			    <span class="navbar-toggler-icon"></span>
+			  </button>
 
-		  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-		    <ul class="navbar-nav mr-auto">
-		      <li class="nav-item active">
-		        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-		      </li>
-		      <li class="nav-item">
-		        <a class="nav-link" href="#">Link</a>
-		      </li>
-		      <li class="nav-item dropdown">
-		        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-		          Dropdown
-		        </a>
-		        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-		          <a class="dropdown-item" href="#">Action</a>
-		          <a class="dropdown-item" href="#">Another action</a>
-		          <div class="dropdown-divider"></div>
-		          <a class="dropdown-item" href="#">Something else here</a>
-		        </div>
-		      </li>
-		      <li class="nav-item">
-		        <a class="nav-link disabled" href="#">Disabled</a>
-		      </li>
-		    </ul>
-		    <button type="button" class="btn">
-			  Корзина <span class="badge badge-success" v-text="cartItemCount"></span>
-			</button>
-		  </div>
+			  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+			    <ul class="navbar-nav">
+			      <li class="nav-item active">
+			        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+			      </li>
+			      <li class="nav-item">
+			        <a class="nav-link" href="#">Link</a>
+			      </li>
+			      <li class="nav-item dropdown">
+			        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+			          Dropdown
+			        </a>
+			        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+			          <a class="dropdown-item" href="#">Action</a>
+			          <a class="dropdown-item" href="#">Another action</a>
+			          <div class="dropdown-divider"></div>
+			          <a class="dropdown-item" href="#">Something else here</a>
+			        </div>
+			      </li>
+			      <li class="nav-item">
+			        <a class="nav-link disabled" href="#">Disabled</a>
+			      </li>
+			    </ul>
+			  </div>
+			  	<button type="button" class="btn" @click="showCheckout">
+				  Корзина <span class="badge badge-success" v-text="cartItemCount"></span>
+				</button>
+			</div>
 		</nav>
-		<main>
+		<main v-if="showProduct">
 			<!-- Основной контент здесь -->
 			<div class="card col-sm-4">
 				<div class="card-header">
@@ -64,9 +66,105 @@
 			    		<strong>{{ product.price | formatPrice }}</strong>
 			    	</div>
 			    	<div class="col-sm-6">
-				  		<button type="button" class="btn btn-info" @click="addToCart">В корзину</button>
+				  		<button type="button" class="btn btn-info" @click="addToCart" v-if="canAddToCart">В корзину</button>
+				  		<button type="button" class="btn btn-outline-secondary" disabled v-else="canAddToCart">В корзину</button>
 				  	</div>
 			    </div>
+			</div>
+		</main>
+		<main class="container checkout" v-else>
+			<h2>Оформление заказа</h2>
+			<form action="#">
+				<h4>Личные данные</h4>
+				<hr>
+				<div class="row">
+					<div class="col">
+						<div class="form-group">
+						    <label for="lastname">Фамилия</label>
+						    <input type="text" class="form-control" id="lastname" placeholder="" v-model.trim="order.lastname">
+					  	</div>
+					</div>
+					<div class="col">
+						<div class="form-group">
+						    <label for="firstname">Имя</label>
+						    <input type="text" class="form-control" id="firstname" placeholder="" v-model.trim="order.firstname">
+					  	</div>
+					</div>
+					<div class="col">
+						<div class="form-group">
+						    <label for="patronymic">Отчество</label>
+						    <input type="text" class="form-control" id="patronymic" placeholder="" v-model.trim="order.patronymic">
+					  	</div>
+					</div>
+				</div>
+				<h4>Адрес доставки</h4>
+				<hr>
+				<div class="row">
+					<div class="col-2">
+						<div class="form-group">
+						    <label for="state">Штат</label>
+						    <select class="form-control" id="state" v-model="order.state">
+						      <option disabled>State</option>
+						      <option v-for="(state, key) in states" :value="state">{{ key }}</option>
+						    </select>
+						  </div>
+					</div>
+					<div class="col">
+						<div class="form-group">
+						    <label for="city">Город</label>
+						    <input type="text" class="form-control" id="city" placeholder="" v-model.trim="order.city">
+					  	</div>
+					</div>
+					<div class="col-12">
+						<div class="form-group">
+						    <label for="address">Адрес</label>
+						    <input type="text" class="form-control" id="address" placeholder="" v-model.trim="order.address">
+					  	</div>
+					</div>
+					<div class="col">
+						<div class="form-group form-check">
+						    <input type="checkbox" class="form-check-input" id="gift"
+						    	:true-value="order.sendGift" 
+						    	:false-value="order.dontSendGift" 
+						    	v-model="order.gift">
+						    <label class="form-check-label" for="gift">Отправить в подарок?</label>
+					  	</div>
+					</div>
+					<div class="col">
+						<div class="custom-control custom-radio">
+						  <input type="radio" id="methodHome" name="method" class="custom-control-input" value="Home" 
+							  :value="order.methodHome"
+							  v-model="order.method">
+						  <label class="custom-control-label" for="methodHome">Домашний адрес</label>
+						</div>
+						<div class="custom-control custom-radio">
+						  <input type="radio" id="methodBusiness" name="method" class="custom-control-input" value="Business" 
+						  	:value="order.methodBusiness"
+						  	v-model="order.method">
+						  <label class="custom-control-label" for="methodBusiness">Рабочий адрес</label>
+						</div>
+					</div>
+				</div>
+			</form>
+			<hr>
+			<div class="alert alert-info">
+				<h3>Ваши данные:</h3>
+				<ul class="verify">
+					<li><strong>ФИО:</strong> {{ [order.lastname, order.firstname, order.patronymic].join(" ") }}</li>
+					<li><strong>Адрес:</strong> {{ order.address }}</li>
+					<li><strong>Город:</strong> {{ order.city }}</li>
+					<li><strong>Штат:</strong> {{ order.state }}</li>
+					<li><strong>В подарок:</strong> {{ order.gift }}</li>
+					<li><strong>Вариант доставки:</strong> {{ order.method }}</li>
+				</ul>
+			</div>
+
+			<div class="row">
+				<div class="col-12">
+					<div class="alert alert-secondary clearfix">
+						<button class="btn btn-success float-right" @click="submitForm">Заказать</button>
+					</div>
+				</div>
 			</div>
 		</main>
 	</div>
@@ -82,10 +180,12 @@
 		el: '#app',
 		data: {
 			sitename: 'Интернет-магазин на Vue.js',
+			showProduct: false,
 			product: {
 				// http://www.holodilnik.ru/digital_tech/notebook/asus/90nr00i3_m1074/sankt-peterburg/
 				id: 1001,
 				new: true,
+				availableCount: 4,
 				title: 'Ноутбук ASUS FX 504 GE-E 4633 T i7-8750 H (90 NR 00 I3-M 10740) Gunmetal, Metal',
 				description: 'Отличная модель, которая подойдет все любителям гейминга.',
 				characteristics: {
@@ -117,16 +217,45 @@
 				price: '4743',
 				image: 'http://holod.ru/pics/clean/medium/50/581250_0.jpg'
 			},
-			cart: []
+			cart: [],
+			order: {
+				lastname: '',
+				firstname: '',
+				patronymic: '',
+				address: '',
+				city: '',
+				state: '',
+				method: 'Домой',
+				gift: 'Не отправлять в подарок',
+				sendGift: 'Отправить в подарок',
+				dontSendGift: 'Не отправлять в подарок',
+				methodHome: 'Домой',
+				methodBusiness: 'На работу'
+			},
+			states: {
+				AL: 'Alabama',
+				AR: 'Arizona',
+				CA: 'California',
+				NV: 'Nevada'
+			}
 		},
 		computed: {
 			cartItemCount() {
 				return this.cart.length || '';
+			},
+			canAddToCart() {
+				return this.product.availableCount > this.cartItemCount;
 			}
 		},
 		methods: {
 			addToCart() {
 				this.cart.push(this.product.id);
+			},
+			showCheckout() {
+				this.showProduct = !this.showProduct;
+			},
+			submitForm() {
+				alert('Заказ отправлен!');
 			}
 		},
 		filters: {
