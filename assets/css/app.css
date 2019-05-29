@@ -7,3 +7,12 @@
 .checkout h2 {
 	margin-bottom: 20px;
 }
+
+.productCountInfo {
+	font-size: 14px;
+	text-align: center;
+}
+
+.rating {
+	color: gold;
+}

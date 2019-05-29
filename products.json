@@ -1,0 +1,189 @@
+{
+	"products": [
+		{
+			"_from": "http://www.holodilnik.ru/digital_tech/notebook/asus/90nr00i3_m1074/sankt-peterburg/",
+			"id": 1001,
+			"new": true,
+			"availableCount": 10,
+			"rating": 4,
+			"title": "Ноутбук ASUS FX 504 GE-E 4633 T i7-8750 H (90 NR 00 I3-M 10740) Gunmetal, Metal",
+			"description": "Отличная модель, которая подойдет все любителям гейминга.",
+			"characteristics": {
+				"processor": {
+					"title": "Процессор",
+					"text": "Intel Core i7 2,2 ГГц"
+				},
+				"RAM": {
+					"title": "Оперативная память",
+					"text": "8 ГБ DDR4-2666 МГц"
+				},
+				"OS": {
+					"title": "Операционная система",
+					"text": "Windows 10"
+				},
+				"HDD": {
+					"title": "Встроенная память",
+					"text": "1000 Гб (HDD) + 256 Гб (SSD)"
+				},
+				"display": {
+					"title": "Дисплей",
+					"text": "15.6\", 1920x1080, широкоформатный"
+				},
+				"video": {
+					"title": "Видео",
+					"text": "4 Гб GDDR5"
+				}
+			},
+			"price": "4743",
+			"image": "http://holod.ru/pics/clean/medium/50/581250_0.jpg"
+		},
+		{
+			"_from": "http://www.holodilnik.ru/digital_tech/notebook/asus/fx504ge_e4246_i7_8750h_90nr00i3_m11840_metal/sankt-peterburg/",
+			"id": 1002,
+			"new": true,
+			"availableCount": 7,
+			"rating": 5,
+			"title": "Ноутбук ASUS FX 504 GE-E 4246 i7-8750 H (90 NR 00 I3-M 11840) Metal",
+			"description": "Игровой ноут",
+			"characteristics": {
+				"processor": {
+					"title": "Процессор",
+					"text": "Intel Core i7 2,2 ГГц"
+				},
+				"RAM": {
+					"title": "Оперативная память",
+					"text": "8 ГБ DDR4-2666 МГц"
+				},
+				"OS": {
+					"title": "Операционная система",
+					"text": "Windows 10"
+				},
+				"HDD": {
+					"title": "Встроенная память",
+					"text": "1000 Гб (HDD) + 256 Гб (SSD)"
+				},
+				"display": {
+					"title": "Дисплей",
+					"text": "15.6\", 1920x1080, широкоформатный"
+				},
+				"video": {
+					"title": "Видео",
+					"text": "4 Гб GDDR5"
+				}
+			},
+			"price": "78490",
+			"image": "http://holod.ru/pics/clean/medium/80/585680_0.jpg"
+		},
+		{
+			"_from": "http://www.holodilnik.ru/digital_tech/notebook/msi/gp62_8rdwot_edition_051ru_9s7_16jf52_051_black/sankt-peterburg/",
+			"id": 1003,
+			"new": true,
+			"availableCount": 3,
+			"rating": 3,
+			"title": "Ноутбук MSI GP 62 8RD(WOT Edition)-051 RU (9S7-16 JF 52-051) Black",
+			"description": "",
+			"characteristics": {
+				"processor": {
+					"title": "Процессор",
+					"text": "Intel Core i7 2,2 ГГц"
+				},
+				"RAM": {
+					"title": "Оперативная память",
+					"text": "8 ГБ DDR4-2666 МГц"
+				},
+				"OS": {
+					"title": "Операционная система",
+					"text": "Windows 10"
+				},
+				"HDD": {
+					"title": "Встроенная память",
+					"text": "1000 Гб (HDD) + 256 Гб (SSD)"
+				},
+				"display": {
+					"title": "Дисплей",
+					"text": "15.6\", 1920x1080, широкоформатный"
+				},
+				"video": {
+					"title": "Видео",
+					"text": "4 Гб GDDR5"
+				}
+			},
+			"price": "81990",
+			"image": "http://holod.ru/pics/clean/medium/61/567661_0.jpg"
+		},
+		{
+			"_from": "http://www.holodilnik.ru/digital_tech/notebook/msi/gl63_8rd_470xru_9s7_16p612_470_black/sankt-peterburg/",
+			"id": 1004,
+			"new": false,
+			"availableCount": 1,
+			"rating": 5,
+			"title": "Ноутбук MSI GL 63 8RD-470 XRU (9S7-16 P 612-470) Black",
+			"description": "",
+			"characteristics": {
+				"processor": {
+					"title": "Процессор",
+					"text": "Intel Core i7 2,2 ГГц"
+				},
+				"RAM": {
+					"title": "Оперативная память",
+					"text": "8 ГБ DDR4-2666 МГц"
+				},
+				"OS": {
+					"title": "Операционная система",
+					"text": "Windows 10"
+				},
+				"HDD": {
+					"title": "Встроенная память",
+					"text": "1000 Гб (HDD) + 256 Гб (SSD)"
+				},
+				"display": {
+					"title": "Дисплей",
+					"text": "15.6\", 1920x1080, широкоформатный"
+				},
+				"video": {
+					"title": "Видео",
+					"text": "4 Гб GDDR5"
+				}
+			},
+			"price": "72990",
+			"image": "http://holod.ru/pics/clean/medium/95/560995_0.jpg"
+		},
+		{
+			"_from": "http://www.holodilnik.ru/digital_tech/notebook/msi/msi_gl63_8rc_468xru_9s7_16p612_468_black/sankt-peterburg/",
+			"id": 1005,
+			"new": false,
+			"availableCount": 12,
+			"rating": 3,
+			"title": "Ноутбук MSI MSI GL 63 8RC-468 XRU (9S7-16 P 612-468) Black",
+			"description": "",
+			"characteristics": {
+				"processor": {
+					"title": "Процессор",
+					"text": "Intel Core i7 2,2 ГГц"
+				},
+				"RAM": {
+					"title": "Оперативная память",
+					"text": "8 ГБ DDR4-2666 МГц"
+				},
+				"OS": {
+					"title": "Операционная система",
+					"text": "Windows 10"
+				},
+				"HDD": {
+					"title": "Встроенная память",
+					"text": "1000 Гб (HDD) + 256 Гб (SSD)"
+				},
+				"display": {
+					"title": "Дисплей",
+					"text": "15.6\", 1920x1080, широкоформатный"
+				},
+				"video": {
+					"title": "Видео",
+					"text": "4 Гб GDDR5"
+				}
+			},
+			"price": "64490",
+			"image": "http://holod.ru/pics/clean/medium/01/561001_0.jpg"
+		}
+	]
+}

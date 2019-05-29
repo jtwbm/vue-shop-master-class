@@ -8,6 +8,9 @@
 <!-- Bootstrap CSS -->
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
+<!-- font awesomwe -->
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+
 <link rel="stylesheet" href="assets/css/app.css">
 
 <title>Интернет-магазин на Vue.js</title>
@@ -55,6 +58,9 @@
 			<div class="card col-sm-4">
 				<div class="card-header">
 			    	<h5 class="card-title">{{ product.title }}<span v-if="product.new" class="badge badge-success">New</span></h5>
+			    	<div class="rating">
+			    		<i class="fa-star" :class="getStarClass(n)" v-for="n in 5"></i>
+			    	</div>
 			  	</div>
 				<div class="card-body">
 					<img :src="product.image" class="card-img-top" :alt="product.title">
@@ -68,6 +74,11 @@
 			    	<div class="col-sm-6">
 				  		<button type="button" class="btn btn-info" @click="addToCart" v-if="canAddToCart">В корзину</button>
 				  		<button type="button" class="btn btn-outline-secondary" disabled v-else="canAddToCart">В корзину</button>
+				  		<span class="productCountInfo">
+					  		<template v-if="product.availableCount - cart.length === 0">Распродано</template>
+				    		<template v-else-if="product.availableCount - cart.length < 5">Осталось {{ product.availableCount - cart.length }} шт.</template>
+				    		<template v-else>Купить сейчас!</template>
+				    	</span>
 				  	</div>
 			    </div>
 			</div>
@@ -171,128 +182,7 @@
 
 <!-- development version, includes helpful console warnings -->
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-
-<script>
-	// Включить/отключить логгирование
-	const APP_LOG_LIFECYCLE_EVENTS = true;
-
-	let webapp = new Vue({
-		el: '#app',
-		data: {
-			sitename: 'Интернет-магазин на Vue.js',
-			showProduct: false,
-			product: {
-				// http://www.holodilnik.ru/digital_tech/notebook/asus/90nr00i3_m1074/sankt-peterburg/
-				id: 1001,
-				new: true,
-				availableCount: 4,
-				title: 'Ноутбук ASUS FX 504 GE-E 4633 T i7-8750 H (90 NR 00 I3-M 10740) Gunmetal, Metal',
-				description: 'Отличная модель, которая подойдет все любителям гейминга.',
-				characteristics: {
-					processor: {
-						title: 'Процессор',
-						text: 'Intel Core i7 2,2 ГГц'
-					},
-					RAM: {
-						title: 'Оперативная память',
-						text: '8 ГБ DDR4-2666 МГц'
-					},
-					OS: {
-						title: 'Операционная система',
-						text: 'Windows 10'
-					},
-					HDD: {
-						title: 'Встроенная память',
-						text: '1000 Гб (HDD) + 256 Гб (SSD)'
-					},
-					display: {
-						title: 'Дисплей',
-						text: '15,6", 1920x1080, широкоформатный'
-					},
-					video: {
-						title: 'Видео',
-						text: '4 Гб GDDR5'
-					}
-				},
-				price: '4743',
-				image: 'http://holod.ru/pics/clean/medium/50/581250_0.jpg'
-			},
-			cart: [],
-			order: {
-				lastname: '',
-				firstname: '',
-				patronymic: '',
-				address: '',
-				city: '',
-				state: '',
-				method: 'Домой',
-				gift: 'Не отправлять в подарок',
-				sendGift: 'Отправить в подарок',
-				dontSendGift: 'Не отправлять в подарок',
-				methodHome: 'Домой',
-				methodBusiness: 'На работу'
-			},
-			states: {
-				AL: 'Alabama',
-				AR: 'Arizona',
-				CA: 'California',
-				NV: 'Nevada'
-			}
-		},
-		computed: {
-			cartItemCount() {
-				return this.cart.length || '';
-			},
-			canAddToCart() {
-				return this.product.availableCount > this.cartItemCount;
-			}
-		},
-		methods: {
-			addToCart() {
-				this.cart.push(this.product.id);
-			},
-			showCheckout() {
-				this.showProduct = !this.showProduct;
-			},
-			submitForm() {
-				alert('Заказ отправлен!');
-			}
-		},
-		filters: {
-			formatPrice(price) {
-				if(!parseInt(price)) { return ""; }
-
-				let formatPrice = parseInt(price).toLocaleString() + ' ₽';
-
-				return formatPrice;
-			}
-		},
-		beforeCreate() {
-			if(APP_LOG_LIFECYCLE_EVENTS) { console.info('beforeCreate') }
-		},
-		created() {
-			if(APP_LOG_LIFECYCLE_EVENTS) { console.info('created') }
-		},
-		beforeMount() {
-			if(APP_LOG_LIFECYCLE_EVENTS) { console.info('beforeMount') }
-		},
-		mounted() {
-			if(APP_LOG_LIFECYCLE_EVENTS) { console.info('mounted') }
-		},
-		beforeUpdate() {
-			if(APP_LOG_LIFECYCLE_EVENTS) { console.info('beforeUpdate') }
-		},
-		updated() {
-			if(APP_LOG_LIFECYCLE_EVENTS) { console.info('updated') }
-		},
-		beforeDestroy() {
-			if(APP_LOG_LIFECYCLE_EVENTS) { console.info('beforeDestroy') }
-		},
-		destroyed() {
-			if(APP_LOG_LIFECYCLE_EVENTS) { console.info('destroyed') }
-		},
-	});
-</script>
+<script src="assets/js/app.js"></script>
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
