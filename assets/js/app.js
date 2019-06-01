@@ -1,48 +1,9 @@
-// Включить/отключить логгирование
-const APP_LOG_LIFECYCLE_EVENTS = true;
-
 let webapp = new Vue({
 	el: '#app',
 	data: {
 		sitename: 'Интернет-магазин на Vue.js',
 		showProduct: true,
-		product: {
-			// http://www.holodilnik.ru/digital_tech/notebook/asus/90nr00i3_m1074/sankt-peterburg/
-			id: 1001,
-			new: true,
-			availableCount: 10,
-			rating: 4,
-			title: 'Ноутбук ASUS FX 504 GE-E 4633 T i7-8750 H (90 NR 00 I3-M 10740) Gunmetal, Metal',
-			description: 'Отличная модель, которая подойдет все любителям гейминга.',
-			characteristics: {
-				processor: {
-					title: 'Процессор',
-					text: 'Intel Core i7 2,2 ГГц'
-				},
-				RAM: {
-					title: 'Оперативная память',
-					text: '8 ГБ DDR4-2666 МГц'
-				},
-				OS: {
-					title: 'Операционная система',
-					text: 'Windows 10'
-				},
-				HDD: {
-					title: 'Встроенная память',
-					text: '1000 Гб (HDD) + 256 Гб (SSD)'
-				},
-				display: {
-					title: 'Дисплей',
-					text: '15,6", 1920x1080, широкоформатный'
-				},
-				video: {
-					title: 'Видео',
-					text: '4 Гб GDDR5'
-				}
-			},
-			price: '4743',
-			image: 'http://holod.ru/pics/clean/medium/50/581250_0.jpg'
-		},
+		products: [],
 		cart: [],
 		order: {
 			lastname: '',
@@ -69,13 +30,23 @@ let webapp = new Vue({
 		cartItemCount() {
 			return this.cart.length || '';
 		},
-		canAddToCart() {
-			return this.product.availableCount > this.cartItemCount;
+		sortedProducts() {
+			let arrProducts = [];
+			if(this.products.length) {
+				arrProducts = this.products.slice(0);
+				arrProducts.sort((x, y) => x.title.toLowerCase() < y.title.toLowerCase() ? -1 : 1);
+			}
+			return arrProducts;
 		}
 	},
 	methods: {
-		addToCart() {
-			this.cart.push(this.product.id);
+		canAddToCart(product) {
+			// return this.products[id].availableCount > this.cartItemCount;
+			return product.availableCount > 0;
+		},
+		addToCart(product) {
+			this.cart.push(product.id);
+			product.availableCount--;
 		},
 		showCheckout() {
 			this.showProduct = !this.showProduct;
@@ -83,8 +54,8 @@ let webapp = new Vue({
 		submitForm() {
 			alert('Заказ отправлен!');
 		},
-		getStarClass(n) {
-			return this.product.rating < n ? 'far' : 'fas';
+		getStarClass(n, product) {
+			return product.rating < n ? 'far' : 'fas';
 		}
 	},
 	filters: {
@@ -96,28 +67,10 @@ let webapp = new Vue({
 			return formatPrice;
 		}
 	},
-	beforeCreate() {
-		if(APP_LOG_LIFECYCLE_EVENTS) { console.info('beforeCreate') }
-	},
 	created() {
-		if(APP_LOG_LIFECYCLE_EVENTS) { console.info('created') }
-	},
-	beforeMount() {
-		if(APP_LOG_LIFECYCLE_EVENTS) { console.info('beforeMount') }
-	},
-	mounted() {
-		if(APP_LOG_LIFECYCLE_EVENTS) { console.info('mounted') }
-	},
-	beforeUpdate() {
-		if(APP_LOG_LIFECYCLE_EVENTS) { console.info('beforeUpdate') }
-	},
-	updated() {
-		if(APP_LOG_LIFECYCLE_EVENTS) { console.info('updated') }
-	},
-	beforeDestroy() {
-		if(APP_LOG_LIFECYCLE_EVENTS) { console.info('beforeDestroy') }
-	},
-	destroyed() {
-		if(APP_LOG_LIFECYCLE_EVENTS) { console.info('destroyed') }
-	},
+		axios.get('./products.json')
+			.then(response => {
+				this.products = response.data.products;
+			});
+	}
 });

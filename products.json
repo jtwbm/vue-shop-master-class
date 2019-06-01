@@ -1,6 +1,43 @@
 {
 	"products": [
 		{
+			"_from": "http://www.holodilnik.ru/digital_tech/notebook/msi/gl63_8rd_470xru_9s7_16p612_470_black/sankt-peterburg/",
+			"id": 1004,
+			"new": false,
+			"availableCount": 1,
+			"rating": 5,
+			"title": "Ноутбук MSI GL 63 8RD-470 XRU (9S7-16 P 612-470) Black",
+			"description": "",
+			"characteristics": {
+				"processor": {
+					"title": "Процессор",
+					"text": "Intel Core i7 2,2 ГГц"
+				},
+				"RAM": {
+					"title": "Оперативная память",
+					"text": "8 ГБ DDR4-2666 МГц"
+				},
+				"OS": {
+					"title": "Операционная система",
+					"text": "Windows 10"
+				},
+				"HDD": {
+					"title": "Встроенная память",
+					"text": "1000 Гб (HDD) + 256 Гб (SSD)"
+				},
+				"display": {
+					"title": "Дисплей",
+					"text": "15.6\", 1920x1080, широкоформатный"
+				},
+				"video": {
+					"title": "Видео",
+					"text": "4 Гб GDDR5"
+				}
+			},
+			"price": "72990",
+			"image": "http://holod.ru/pics/clean/medium/95/560995_0.jpg"
+		},
+		{
 			"_from": "http://www.holodilnik.ru/digital_tech/notebook/asus/90nr00i3_m1074/sankt-peterburg/",
 			"id": 1001,
 			"new": true,
@@ -112,12 +149,12 @@
 			"image": "http://holod.ru/pics/clean/medium/61/567661_0.jpg"
 		},
 		{
-			"_from": "http://www.holodilnik.ru/digital_tech/notebook/msi/gl63_8rd_470xru_9s7_16p612_470_black/sankt-peterburg/",
-			"id": 1004,
+			"_from": "http://www.holodilnik.ru/digital_tech/notebook/msi/msi_gl63_8rc_468xru_9s7_16p612_468_black/sankt-peterburg/",
+			"id": 1005,
 			"new": false,
-			"availableCount": 1,
-			"rating": 5,
-			"title": "Ноутбук MSI GL 63 8RD-470 XRU (9S7-16 P 612-470) Black",
+			"availableCount": 12,
+			"rating": 3,
+			"title": "Ноутбук MSI MSI GL 63 8RC-468 XRU (9S7-16 P 612-468) Black",
 			"description": "",
 			"characteristics": {
 				"processor": {
@@ -145,15 +182,15 @@
 					"text": "4 Гб GDDR5"
 				}
 			},
-			"price": "72990",
-			"image": "http://holod.ru/pics/clean/medium/95/560995_0.jpg"
+			"price": "64490",
+			"image": "http://holod.ru/pics/clean/medium/01/561001_0.jpg"
 		},
 		{
 			"_from": "http://www.holodilnik.ru/digital_tech/notebook/msi/msi_gl63_8rc_468xru_9s7_16p612_468_black/sankt-peterburg/",
-			"id": 1005,
+			"id": 1006,
 			"new": false,
-			"availableCount": 12,
-			"rating": 3,
+			"availableCount": 0,
+			"rating": 1,
 			"title": "Ноутбук MSI MSI GL 63 8RC-468 XRU (9S7-16 P 612-468) Black",
 			"description": "",
 			"characteristics": {

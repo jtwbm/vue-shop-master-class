@@ -53,34 +53,35 @@
 				</button>
 			</div>
 		</nav>
-		<main v-if="showProduct">
-			<!-- Основной контент здесь -->
-			<div class="card col-sm-4">
-				<div class="card-header">
-			    	<h5 class="card-title">{{ product.title }}<span v-if="product.new" class="badge badge-success">New</span></h5>
-			    	<div class="rating">
-			    		<i class="fa-star" :class="getStarClass(n)" v-for="n in 5"></i>
-			    	</div>
-			  	</div>
-				<div class="card-body">
-					<img :src="product.image" class="card-img-top" :alt="product.title">
-					<hr>
-					<p class="card-text" v-text="product.description"></p>
-				</div>
-			    <div class="card-footer row">
-			    	<div class="col-sm-6">
-			    		<strong>{{ product.price | formatPrice }}</strong>
-			    	</div>
-			    	<div class="col-sm-6">
-				  		<button type="button" class="btn btn-info" @click="addToCart" v-if="canAddToCart">В корзину</button>
-				  		<button type="button" class="btn btn-outline-secondary" disabled v-else="canAddToCart">В корзину</button>
-				  		<span class="productCountInfo">
-					  		<template v-if="product.availableCount - cart.length === 0">Распродано</template>
-				    		<template v-else-if="product.availableCount - cart.length < 5">Осталось {{ product.availableCount - cart.length }} шт.</template>
-				    		<template v-else>Купить сейчас!</template>
-				    	</span>
+		<main class="container" v-if="showProduct">
+			<div class="row">
+				<div class="card col-sm-4" v-for="product in sortedProducts" :key="product.id">
+					<div class="card-header">
+				    	<h5 class="card-title">{{ product.title }} <span v-if="product.new" class="badge badge-success">New</span></h5>
+				    	<div class="rating">
+				    		<i class="fa-star" :class="getStarClass(n, product)" v-for="n in 5"></i>
+				    	</div>
 				  	</div>
-			    </div>
+					<div class="card-body">
+						<img :src="product.image" class="card-img-top" :alt="product.title">
+						<hr>
+						<p class="card-text" v-text="product.description"></p>
+					</div>
+				    <div class="card-footer row">
+				    	<div class="col-sm-6">
+				    		<strong>{{ product.price | formatPrice }}</strong>
+				    	</div>
+				    	<div class="col-sm-6">
+					  		<button type="button" class="btn btn-info" @click="addToCart(product)" v-if="canAddToCart(product)">В корзину</button>
+					  		<button type="button" class="btn btn-outline-secondary" disabled v-else>В корзину</button>
+					  		<div class="productCountInfo">
+						  		<template v-if="product.availableCount === 0">Распродано</template>
+					    		<template v-else-if="product.availableCount < 5">Осталось {{ product.availableCount }} шт.</template>
+					    		<template v-else>Купить сейчас!</template>
+					    	</div>
+					  	</div>
+				    </div>
+				</div>
 			</div>
 		</main>
 		<main class="container checkout" v-else>
@@ -182,6 +183,7 @@
 
 <!-- development version, includes helpful console warnings -->
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.min.js"></script>
 <script src="assets/js/app.js"></script>
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
