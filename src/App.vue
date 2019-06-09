@@ -1,6 +1,6 @@
 <template>
   <div id="shop-app">
-    <app-header />
+    <app-header :cartItemCount="cartItemCount" />
     <router-view/>
   </div>
 </template>
@@ -11,6 +11,11 @@ import Header from './components/Header';
 export default {
   components: {
     'app-header': Header
+  },
+  data() {
+  	return {
+  		cartItemCount: 0
+  	}
   }
 }
 </script>

@@ -7,15 +7,13 @@
 		  </button>
 
 		  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-		    <ul class="navbar-nav">
-		      <li class="nav-item active">
+		    <div class="navbar-nav">
 		        <router-link class="nav-link" :to="{ name: 'iMain' }">Каталог</router-link>
-		      </li>
-		    </ul>
+		    </div>
 		  </div>
-		  	<button type="button" class="btn" @click="showCheckout">
+		  	<router-link :to="{ name: 'Form' }" class="nav-link">
 			  Корзина <span class="badge badge-success" v-text="cartItemCount"></span>
-			</button>
+			</router-link>
 		</div>
 	</nav>
 </template>
@@ -30,9 +28,18 @@ export default {
 		}
 	},
 	methods: {
-		showCheckout() {
-			this.$router.push({ name: 'Form' });
-		},
 	}
 }
 </script>
+
+<style lang="scss">
+.nav-link {
+	white-space: nowrap;
+	color: #000;
+
+	&.router-link-active {
+		color: green;
+		font-weight: 600;
+	}
+}
+</style>

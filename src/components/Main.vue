@@ -3,7 +3,7 @@
 		<div class="row">
 			<div class="card col-sm-4" v-for="product in sortedProducts" :key="product.id">
 				<div class="card-header">
-			    	<h5 class="card-title">{{ product.title }} <span v-if="product.new" class="badge badge-success">New</span></h5>
+			    	<router-link tag="h5" :to="{ name: 'Product', params: { id: product.id }}" class="card-title">{{ product.title }} <span v-if="product.new" class="badge badge-success">New</span></router-link>
 			    	<div class="rating">
 			    		<i class="fa-star" :class="getStarClass(n, product)" v-for="n in 5"></i>
 			    	</div>
