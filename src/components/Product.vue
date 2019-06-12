@@ -9,9 +9,17 @@
                 <div class="rating">
 		    		<i class="fa-star" :class="getStarClass(n, product)" v-for="n in 5"></i>
 		    	</div>
-                    <div class="col-sm-6">
+                <div class="row">
+                     <div class="col-sm-3">
                         <strong>{{ product.price | formatPrice }}</strong>
                     </div>
+                    <div class="col-sm-3">
+                        <button class="btn btn-primary" @click="edit">Edit</button>
+                    </div>
+                </div>
+                <div class="row">
+                    <router-view></router-view>
+                </div>
             </div>
         </div>
     </div>
@@ -35,7 +43,10 @@ export default {
 	methods:{
 		getStarClass(n, product) {
 			return product.rating < n ? 'far' : 'fas';
-		}
+		},
+        edit() {
+            this.$router.push({ name: 'Edit' });
+        }
 	},
     created() {
         const _this = this;

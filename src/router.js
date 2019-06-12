@@ -1,9 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Form from './components/Form'
 import Main from './components/Main'
-import Product from './components/Product'
-
 Vue.use(Router)
 
 export default new Router({
@@ -23,7 +20,19 @@ export default new Router({
     {
       path: '/product/:id',
       name: 'Product',
-      component: () => import('./components/Product.vue')
+      component: () => import('./components/Product.vue'),
+      children: [
+      	{
+      		path: 'edit',
+      		name: 'Edit',
+      		props: true,
+      		component: () => import('./components/EditProduct')
+      	}
+      ]
+    },
+    {
+    	path: '*',
+    	redirect: '/'
     }
   ]
 })

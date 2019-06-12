@@ -1,7 +1,9 @@
 <template>
   <div id="shop-app">
     <app-header :cartItemCount="cartItemCount" />
-    <router-view/>
+    <transition mode="out-in" name="fade">
+      <router-view/>
+    </transition>
   </div>
 </template>
 
@@ -20,3 +22,15 @@ export default {
 }
 </script>
 
+<style lang="scss">
+.fade {
+  &-enter-active,
+  &-leave-active {
+    transition: opacity .5s ease-in-out; 
+  }
+  &-enter,
+  &-leave-to {
+    opacity: 0;
+  }
+}
+</style>
