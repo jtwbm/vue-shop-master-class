@@ -33,14 +33,16 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
+
 export default {
 	data() {
 		return {
-			products: [],
 			cart: [],
 		}
 	},
 	computed: {
+		...mapGetters([ 'products' ]),
 		cartItemCount() {
 			return this.cart.length || '';
 		},
@@ -78,10 +80,7 @@ export default {
 		}
 	},
 	created() {
-		axios.get('/products.json')
-			.then(response => {
-				this.products = response.data.products;
-			});
+		this.$store.dispatch('initStore');
 	}
 }
 </script>
